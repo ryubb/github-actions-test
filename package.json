@@ -1,0 +1,10 @@
+{
+  "name": "github-actions-test",
+  "version": "0.0.1",
+  "author": "ryubb",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@actions/core": "^1.6.0"
+  }
+}
