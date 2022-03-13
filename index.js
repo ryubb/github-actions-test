@@ -1,3 +1,9 @@
 const core = require("@actions/core");
 
-core.setOutput("test github");
+async function run() {
+  core.info("Info: Hello world!");
+  core.debug("Debug: Hello world!");
+  core.setFailed("Error: Hello world!");
+}
+
+run();
