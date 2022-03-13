@@ -1,9 +1,11 @@
 name: test
-on: [push]
+on:
+  pull_request:
+    types: [labeled]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: ryubb/github-actions-test@v0.0.4
+    - uses: ryubb/github-actions-test@v0.0.8
