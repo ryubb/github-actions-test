@@ -1,21 +1,12 @@
 name: 'ryubb-github-actions-test'
 description: 'test github actions'
 inputs:
-  channel-id: # channel id to post message when using bot token
-    description: 'Slack channel ID where message will be posted. Needed if using bot token'
-    required: false
-  slack-message: # message to post when using bot token
-    description: 'Message to post into Slack. Needed if using bot token'
-    required: false
-  payload: # JSON payload to send to Slack via webhook
-    description: 'JSON payload to send to Slack if webhook route. If not supplied, json from GitHub event will be sent instead'
-    required: false
-  payload-file-path: # path to JSON payload to send to Slack via webhook
-    description: 'path to JSON payload to send to Slack if webhook route. If not supplied, json from GitHub event will be sent instead. If payload is provided, it will take preference over this field'
+  test-input:
+    description: 'test-input'
     required: false
 outputs:
-  time: # id of output
-    description: 'The time'
+  test-output: # id of output
+    description: 'test output'
 runs:
   using: 'node14'
-  main: 'dist/index.js'
+  main: 'index.js'
