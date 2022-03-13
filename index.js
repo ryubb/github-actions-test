@@ -1,3 +1,3 @@
 const core = require("@actions/core");
 
-core.setOutput("test github");
+core.setOutput("test-output", "test github actions");
