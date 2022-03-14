@@ -1,9 +1,9 @@
 name: 'ryubb-github-actions-test'
 description: 'test github actions'
 inputs:
-  test-input:
-    description: 'test-input'
-    required: false
+  access-token:
+    description: 'github access token'
+    required: true
 outputs:
   test-output: # id of output
     description: 'test output'
