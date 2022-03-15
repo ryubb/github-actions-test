@@ -27,8 +27,8 @@ async function updatePage(
       },
     });
   } catch (error: typeof APIResponseError) {
-    console.error("errorが発生しました");
     console.error(error.body);
+    throw new Error("pageの更新に失敗しました。");
   }
 }
 
@@ -63,8 +63,14 @@ async function run() {
     return;
   }
 
-  await updatePage(pageId, statusProperty, statusValue);
-  console.log("ページの更新が完了しました");
+  try {
+    await updatePage(pageId, statusProperty, statusValue);
+    console.log("ページの更新が完了しました");
+  } catch (error) {
+    if (error instanceof Error) {
+      core.setFailed(error.message);
+    }
+  }
 }
 
 run();
