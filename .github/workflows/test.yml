@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: ryubb/github-actions-test@v0.1.4
+    - uses: ryubb/github-actions-test@v0.2.5
       with:
-        access-token: ${{ secrets.GITHUB_TOKEN }}
+        notion-key: "secret_CqFw8hMxypE9c2wMjqjK1UBuOXnB82ThGGu4Wy3rzGz"
+        notion-database-url: ${{ secrets.NOTION_DATABASE_URL }}
+        status: "In progress"
