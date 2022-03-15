@@ -63,7 +63,7 @@ async function run() {
     return;
   }
 
-  await updatePage(pageId, statusProperty, statusValue);
+  await updatePage("pageId", statusProperty, statusValue);
   console.log("ページの更新が完了しました");
 }
 
