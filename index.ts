@@ -27,8 +27,8 @@ async function updatePage(
       },
     });
   } catch (error: typeof APIResponseError) {
-    console.error("errorが発生しました");
-    console.error(error.body);
+    core.setFailed("pageIdの取得に失敗しました");
+    console.error(error.body.message);
   }
 }
 
@@ -63,7 +63,7 @@ async function run() {
     return;
   }
 
-  await updatePage(pageId, statusProperty, statusValue);
+  await updatePage("pageId", statusProperty, statusValue);
   console.log("ページの更新が完了しました");
 }
 

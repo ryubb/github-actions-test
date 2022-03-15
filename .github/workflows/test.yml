@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: ryubb/github-actions-test@v0.2.7
+    - uses: ryubb/github-actions-test@v0.2.9
       with:
         notion-key: ${{ secrets.NOTION_KEY }}
         status-property: "Status"
