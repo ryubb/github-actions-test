@@ -1,8 +1,18 @@
 name: 'ryubb-github-actions-test'
 description: 'test github actions'
 inputs:
-  access-token:
-    description: 'github access token'
+  notion-key:
+    description: "githubのenvを通して、notion keyを送ってください。"
+    required: true
+  notion-database-url:
+    description: "githubのenvを通して、notionのdatabase urlを送ってください。"
+    required: false
+  status-property:
+    description: "CI実行後に変更したいステータスのプロパティ名"
+    required: true
+    default: "Status"
+  status-value:
+    description: 'CI実行後に変更したいステータスを指定してください。'
     required: true
 outputs:
   test-output: # id of output
