@@ -12,8 +12,12 @@ inputs:
     required: true
     default: "Status"
   status-value:
-    description: 'CI実行後に変更したいステータスを指定してください。'
+    description: "CI実行後に変更したいステータスを指定してください。"
     required: true
+  notion-url-hook:
+    description: "NotionのURLをPRの内容から取得するために、必要な文字列です。"
+    required: true
+    default: "#notion"
 outputs:
   test-output: # id of output
     description: 'test output'
