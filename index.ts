@@ -1,6 +1,6 @@
 const github = require("@actions/github");
 const core = require("@actions/core");
-const { Client } = require("@notionhq/client");
+const { Client, APIResponseError } = require("@notionhq/client");
 
 const notionKey = core.getInput("notion-key");
 const statusProperty = core.getInput("status-property");
@@ -10,7 +10,11 @@ const notion = new Client({
   auth: notionKey,
 });
 
-async function updatePage(pageId, statusProperty, statusValue) {
+async function updatePage(
+  pageId: string,
+  statusProperty: string,
+  statusValue: string,
+): Promise<void> {
   try {
     await notion.pages.update({
       page_id: pageId,
@@ -22,13 +26,13 @@ async function updatePage(pageId, statusProperty, statusValue) {
         },
       },
     });
-  } catch (error) {
+  } catch (error: typeof APIResponseError) {
     console.error("errorが発生しました");
     console.error(error.body);
   }
 }
 
-function getPageId(url) {
+function getPageId(url: string): string | null {
   const pattern = /^.*-(\w+)$/;
   const result = pattern.exec(url);
   return result && result[1];
@@ -47,7 +51,17 @@ async function run() {
   const pattern = /^#notion\s*(https:\/\/www.notion.so\/.+)/;
   const result = pattern.exec(pullRequestBody);
   const notionPageUrl = result && result[1];
+
+  if (!notionPageUrl) {
+    core.setFailed("notionのURLがPRに記載されていません");
+    return;
+  }
+
   const pageId = getPageId(notionPageUrl);
+  if (!pageId) {
+    core.setFailed("pageIdの取得に失敗しました");
+    return;
+  }
 
   await updatePage(pageId, statusProperty, statusValue);
   console.log("ページの更新が完了しました");
