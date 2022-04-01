@@ -1,7 +1,9 @@
 name: test
 on:
   pull_request:
-    types: [labeled]
+    branches:
+      - main
+    types: [closed]
 
 jobs:
   build:

@@ -1,0 +1,36 @@
+name: test
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: echo Notion page uuid
+      id: echo-notion-page-uuid
+      run: |
+        UUID=$(echo "${{ github.event.pull_request.body }}" | sed -E 's/#notion https:\/\/www.notion.so\/.*\/(.*-)*(.*)/\2/')
+        echo $UUID
+        echo "::set-output name=UUID::$UUID"
+    - name: Update Notion page
+      run: |
+        curl -X PATCH https://api.notion.com/v1/pages/${{ steps.echo-notion-page-uuid.outputs.UUID }} \
+          -H "Authorization: Bearer ${{ secrets.NOTION_KEY }}" \
+          -H "Content-Type: application/json" \
+          -H "Notion-Version: 2022-02-22" \
+            --data '
+              {
+                "properties": {
+                  "Status": {
+                    "select": {
+                      "name": "In Review"
+                    }
+                  },
+                  "PR": {
+                    "url": "${{ github.event.pull_request.html_url }}"
+                  }
+                }
+              }
+            '
